@@ -1,0 +1,22 @@
+# go2rtc configuration.
+# Docs: https://github.com/AlexxIT/go2rtc
+#
+# Run with:  ./go2rtc -c go2rtc.yaml
+# (download the binary for your OS from the go2rtc GitHub releases page)
+
+streams:
+  # Hikvision RTSP path convention: /Streaming/Channels/<channel><stream>
+  #   channel 1, stream 01 = main/high-res stream
+  #   channel 1, stream 02 = sub/low-res stream (lighter, good for the AI pipeline)
+  # Replace username/password/IP with your camera's actual values.
+  hikvision-01: rtsp://USERNAME:PASSWORD@CAMERA_IP:554/Streaming/Channels/101
+
+api:
+  listen: ":1984"   # web UI + API, open http://<server-ip>:1984 to preview the stream in a browser
+
+rtsp:
+  listen: ":8554"   # go2rtc re-exposes the stream at rtsp://<server-ip>:8554/hikvision-01
+                     # <- this is what ai_pipeline/config.py STREAM_URL should point to
+
+webrtc:
+  listen: ":8555/tcp"  # what the Flutter app's Live Feed page connects to

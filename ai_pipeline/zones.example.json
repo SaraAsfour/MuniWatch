@@ -1,0 +1,9 @@
+{
+  "zones": [
+    {
+      "name": "main_junction",
+      "polygon": [[120, 300], [500, 300], [500, 600], [120, 600]],
+      "allowed_direction": [0, 1]
+    }
+  ]
+}
